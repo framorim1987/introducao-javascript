@@ -14,13 +14,22 @@ btnAdicionar.addEventListener('click', function (event) {
     // criação do novo paciente
     var pacienteTr = montaTr(paciente);
 
+    // valida paciente
+    var erros = validaPaciente(paciente);
+
+    if (erros.length > 0) {
+        exibeMensagemDeErro(erros);
+        return;
+    }
+
     // adiciona o novo paciente a tabela
     var tabela = document.querySelector('#tabela-pacientes');
     tabela.appendChild(pacienteTr);
 
     // limpa o form
     form.reset();
-    
+    var mensagemDeErro = document.querySelector('#mensagem-de-erro');
+    mensagemDeErro.innerHTML = '';
 });
 
 // função para obter valores dos campos do formulário
@@ -60,4 +69,47 @@ function montaTd(dado, classe) {
     td.classList.add(classe);
 
     return td;
+}
+
+function validaPaciente(paciente) {
+
+    var erros = [];
+
+    if (paciente.nome.length == 0) {
+        erros.push('Informe um nome para o paciente');
+    }
+    
+    if (paciente.peso.length == 0) {
+        erros.push('Informe o peso do paciente');
+    }
+
+    if (!validaPeso(paciente.peso)) {
+        erros.push('O peso é inválido');
+    }
+
+    if (paciente.altura.length == 0) {
+        erros.push('Informe a altura do paciente');
+    }
+
+    if (!validaAltura(paciente.altura)) {
+        erros.push('A altura é inválida');
+    }
+
+    if (paciente.gordura.length == 0) {
+        erros.push('Informe o percentual de gordura');
+    }
+
+    return erros;
+}
+
+function exibeMensagemDeErro(erros) {
+    var ul = document.querySelector('#mensagem-de-erro');
+    ul.innerHTML = '';
+
+    erros.forEach(function(erro) {
+        var li = document.createElement('li');
+        li.textContent = erro;
+        ul.appendChild(li);
+    });
+
 }
