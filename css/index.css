@@ -140,7 +140,7 @@ button:disabled {
 	background-color: lightcoral;
 }
 
-#mensagem-de-erro {
+#mensagem-de-erro, #erro-ajax {
 	color: red;
 }
 

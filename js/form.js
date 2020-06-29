@@ -11,9 +11,6 @@ btnAdicionar.addEventListener('click', function (event) {
     // obtém valores dos campos do formulário
     var paciente = obtemPacienteDoFormulario(form);
 
-    // criação do novo paciente
-    var pacienteTr = montaTr(paciente);
-
     // valida paciente
     var erros = validaPaciente(paciente);
 
@@ -22,15 +19,27 @@ btnAdicionar.addEventListener('click', function (event) {
         return;
     }
 
-    // adiciona o novo paciente a tabela
-    var tabela = document.querySelector('#tabela-pacientes');
-    tabela.appendChild(pacienteTr);
+    //adiciona paciente na tabela
+    adionaPacienteNaTabela(paciente);
 
     // limpa o form
     form.reset();
     var mensagemDeErro = document.querySelector('#mensagem-de-erro');
     mensagemDeErro.innerHTML = '';
 });
+
+//_____________________________Funcções________________________________________
+
+// função adicionar os pacientes na tabela
+function adionaPacienteNaTabela(paciente) {
+    // criação do novo paciente
+    var pacienteTr = montaTr(paciente);
+    var tabela = document.querySelector('#tabela-pacientes');
+    tabela.appendChild(pacienteTr);
+    // adiciona o novo paciente a tabela
+    var tabela = document.querySelector('#tabela-pacientes');
+    tabela.appendChild(pacienteTr);
+}
 
 // função para obter valores dos campos do formulário
 function obtemPacienteDoFormulario(form) {
